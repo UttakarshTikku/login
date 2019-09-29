@@ -8,10 +8,9 @@ class Home extends Component {
         this.state = {  }
     }
     render() { 
-        return ( <div>
+        return ( <div className="FormCenter">
             Empty Home Page Here
            </div> )
-
     }
 }
  

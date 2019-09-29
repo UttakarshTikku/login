@@ -15,7 +15,7 @@ class NotFound extends Component {
 
     render() { 
         return ( 
-            <div>
+            <div className="FormCenter">
                 Page Not Found
             </div>
         );

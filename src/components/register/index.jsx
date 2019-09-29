@@ -6,6 +6,7 @@ import {
     validateFormData,
     checkPasswordStrength,
  } from './register.js'
+import Modal from '../modal/index' 
 
 class Register extends Component {
     constructor() {
@@ -15,12 +16,14 @@ class Register extends Component {
             email: '',
             password: '',
             name: '',
-            hasAgreed: false
+            hasAgreed: false,
+            showModal: false
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.toggleModalView = this.toggleModalView.bind(this);
     }
 
     handleChange(e) {
@@ -44,9 +47,17 @@ class Register extends Component {
         validateFormData(this.state);
     }
 
+    toggleModalView() {
+        this.setState({
+            showModal: !this.state.showModal
+        });
+    }
+
     render() {
+        let showTerms = <div style={{"color": "black"}}>Terms And Conditions Listed Here</div>
         return (
         <div className="FormCenter">
+            <Modal handleClose={this.toggleModalView} show={this.state.showModal} children={showTerms}></Modal>
             <form onSubmit={this.handleSubmit} className="FormFields">
               <div className="FormField">
                 <label className="FormField__Label" htmlFor="name">Full Name</label>
@@ -63,7 +74,7 @@ class Register extends Component {
 
               <div className="FormField">
                 <label className="FormField__CheckboxLabel">
-                    <input className="FormField__Checkbox" type="checkbox" name="hasAgreed" value={this.state.hasAgreed} onChange={this.handleChange} /> I agree all statements in <a href="" className="FormField__TermsLink">terms of service</a>
+                    <input className="FormField__Checkbox" type="checkbox" name="hasAgreed" value={this.state.hasAgreed} onChange={this.handleChange} /> I agree all statements in <a href="#" onClick={this.toggleModalView} className="FormField__TermsLink">terms of service</a>
                 </label>
               </div>
 
